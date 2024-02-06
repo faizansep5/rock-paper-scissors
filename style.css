@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body{
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(25, 25, 25);
+  color: white;
+}
+
+.container{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.button-container{
+  position: absolute;
+  top: 150px;
+}
+
+.heading{
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.emoji{
+  width: 50px;
+}
+
+.rock, .paper, .scissors{
+  background-color: rgb(25, 25, 25);
+  border: 3px solid white;
+  padding: 30px;
+  border-radius: 80px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.result-show, .move-show, .score-show{
+  font-size: 25px;
+}
+
+.result-show{
+  font-weight: 700;
+}
+
+.move-show img{
+  width: 50px;
+}
+
+.reset-score{
+  padding: 8px 12px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
