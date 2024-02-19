@@ -54,3 +54,10 @@ body{
   font-size: 14px;
   cursor: pointer;
 }
+
+@media all and (max-width: 500px) {
+  .rock, .paper, .scissors{
+    padding: 20px;
+    margin-right: 7px;
+  }
+}
