@@ -121,11 +121,14 @@ scissorsBtn.addEventListener('click',()=>{
 })
 
 resetScoreBtn.addEventListener('click', ()=>{
-  score.wins = 0;
-  score.losses = 0;
-  score.ties = 0;
-  localStorage.removeItem('score');
-  updateScore();
+
+  if(confirm('Are you sure you want to reset the score?')){
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+    localStorage.removeItem('score');
+    updateScore();
+  }
 })
 
 autoPlayBtn.addEventListener('click', ()=>{
