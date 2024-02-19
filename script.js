@@ -2,6 +2,9 @@ const rockBtn = document.querySelector('.rock')
 const paperBtn = document.querySelector('.paper')
 const scissorsBtn = document.querySelector('.scissors')
 const resetScoreBtn = document.querySelector('.reset-score')
+const autoPlayBtn = document.querySelector('.auto-play-btn')
+
+
 
 const pickComputerMove = () => {
   const randomNumber = Math.random();
@@ -9,11 +12,11 @@ const pickComputerMove = () => {
 
   //Find the computer's move
   if(randomNumber >= 0 && randomNumber < 1/3){
-    computerMove = 'Rock';
+    computerMove = 'rock';
   }else if(randomNumber >= 1/3 && randomNumber < 2/3){
-    computerMove = 'Paper';
+    computerMove = 'paper';
   }else if(randomNumber >= 2/3 && randomNumber < 1){
-    computerMove = 'Scissors';
+    computerMove = 'scissors';
   }
   return computerMove;
 }
@@ -24,39 +27,60 @@ let score = JSON.parse(localStorage.getItem('score')) || {
   ties: 0
 };
 
+let isAutoPlaying = false;
+let intervalId;
+
+const autoPlay = () => {
+
+  if(!isAutoPlaying){
+      intervalId = setInterval(function () {
+      const playermove = pickComputerMove();
+      playGame(playermove);
+    }, 1000)
+    isAutoPlaying = true;
+    autoPlayBtn.innerText = 'Stop Playing'
+  }
+    else{
+      clearInterval(intervalId);
+      isAutoPlaying = false;
+      autoPlayBtn.innerText = 'Auto Play'
+    }
+  
+};
+
 const playGame = (playermove) => {
   const computerMove =  pickComputerMove();
   let result = ''
 
   if(playermove === 'rock'){
     
-    if(computerMove === 'Rock'){
+    if(computerMove === 'rock'){
     result = 'Tie'
-  }else if(computerMove === 'Paper'){
+  }else if(computerMove === 'paper'){
     result = 'You lose'
-  }else if(computerMove === 'Scissors'){
+  }else if(computerMove === 'scissors'){
     result = 'You win'
   }
   }
   
   else if(playermove === 'paper'){
 
-  if(computerMove === 'Paper'){
+  if(computerMove === 'paper'){
     result = 'Tie'
-  }else if(computerMove === 'Scissors'){
+  }else if(computerMove === 'scissors'){
     result = 'You lose'
-  }else if(computerMove === 'Rock'){
+  }else if(computerMove === 'rock'){
     result = 'You win'
   }
   }
   
   else if(playermove === 'scissors'){
 
-  if(computerMove === 'Scissors'){
+  if(computerMove === 'scissors'){
     result = 'Tie'
-  }else if(computerMove === 'Rock'){
+  }else if(computerMove === 'rock'){
     result = 'You lose'
-  }else if(computerMove === 'Paper'){
+  }else if(computerMove === 'paper'){
     result = 'You win'
   }
   }
@@ -104,6 +128,20 @@ resetScoreBtn.addEventListener('click', ()=>{
   updateScore();
 })
 
-addEventListener('DOMContentLoaded', () =>{
+autoPlayBtn.addEventListener('click', ()=>{
+  autoPlay();
+})
+
+document.addEventListener('keydown', (event) => {
+  if(event.key === 'r'){
+    playGame('rock');
+  }else if(event.key === 'p'){
+    playGame('paper');
+  }else if(event.key === 's'){
+    playGame('scissors')
+  }
+})
+
+window.addEventListener('DOMContentLoaded', () =>{
   updateScore();
 })

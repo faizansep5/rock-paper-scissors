@@ -48,7 +48,7 @@ body{
   width: 50px;
 }
 
-.reset-score{
+.reset-score, .auto-play-btn{
   padding: 8px 12px;
   border: none;
   font-size: 14px;
